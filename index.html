@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduPulse LMS Prototype</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="LMS navigation">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">EP</span>
+          <div>
+            <strong>EduPulse</strong>
+            <span>Public LMS</span>
+          </div>
+        </div>
+
+        <nav class="nav-list">
+          <button class="nav-item active" data-view="dashboard" type="button">
+            <span aria-hidden="true">⌂</span>
+            대시보드
+          </button>
+          <button class="nav-item" data-view="courses" type="button">
+            <span aria-hidden="true">▦</span>
+            강좌 관리
+          </button>
+          <button class="nav-item" data-view="learners" type="button">
+            <span aria-hidden="true">◉</span>
+            학습자
+          </button>
+          <button class="nav-item" data-view="reports" type="button">
+            <span aria-hidden="true">▣</span>
+            리포트
+          </button>
+        </nav>
+
+        <div class="support-panel">
+          <span class="status-dot"></span>
+          <div>
+            <strong>운영 상태</strong>
+            <span>12월 계약 종료 기준</span>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">공공 교육서비스 LMS</p>
+            <h1 id="view-title">운영 대시보드</h1>
+          </div>
+          <div class="top-actions">
+            <label class="search">
+              <span aria-hidden="true">⌕</span>
+              <input id="searchInput" type="search" placeholder="강좌, 학습자, 기관 검색" />
+            </label>
+            <button class="icon-button" id="themeToggle" type="button" aria-label="화면 밀도 전환" title="화면 밀도 전환">
+              ◐
+            </button>
+          </div>
+        </header>
+
+        <section class="view active" id="dashboard" aria-labelledby="view-title">
+          <div class="metrics-grid">
+            <article class="metric-card accent-teal">
+              <span>활성 수강생</span>
+              <strong>18,420</strong>
+              <small>전주 대비 +8.4%</small>
+            </article>
+            <article class="metric-card accent-amber">
+              <span>운영 강좌</span>
+              <strong>126</strong>
+              <small>신규 개설 9건</small>
+            </article>
+            <article class="metric-card accent-rose">
+              <span>미채점 과제</span>
+              <strong>342</strong>
+              <small>오늘 마감 47건</small>
+            </article>
+            <article class="metric-card accent-ink">
+              <span>평균 진도율</span>
+              <strong>73%</strong>
+              <small>목표 80%</small>
+            </article>
+          </div>
+
+          <div class="dashboard-layout">
+            <section class="work-panel">
+              <div class="section-head">
+                <div>
+                  <p class="eyebrow">오늘 처리할 일</p>
+                  <h2>운영 큐</h2>
+                </div>
+                <button class="primary-button" type="button">승인 일괄 처리</button>
+              </div>
+              <div class="queue-list" id="queueList"></div>
+            </section>
+
+            <section class="visual-panel" aria-label="학습 현황 요약">
+              <div class="campus-visual">
+                <div class="screen-card screen-main">
+                  <span></span>
+                  <strong>LIVE</strong>
+                  <div></div>
+                </div>
+                <div class="screen-card screen-side">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <div class="orbit orbit-a"></div>
+                <div class="orbit orbit-b"></div>
+              </div>
+              <div class="pulse-summary">
+                <span>실시간 학습 참여</span>
+                <strong>91.2%</strong>
+                <div class="progress-track"><span style="width: 91%"></span></div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="courses" aria-labelledby="view-title">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">강좌 관리</p>
+              <h2>개설 강좌</h2>
+            </div>
+            <div class="segmented">
+              <button class="active" type="button">전체</button>
+              <button type="button">심사중</button>
+              <button type="button">운영중</button>
+            </div>
+          </div>
+          <div class="course-grid" id="courseGrid"></div>
+        </section>
+
+        <section class="view" id="learners" aria-labelledby="view-title">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">학습자 관리</p>
+              <h2>기관별 학습 현황</h2>
+            </div>
+            <button class="primary-button" type="button">CSV 내려받기</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>기관</th>
+                  <th>학습자</th>
+                  <th>완료율</th>
+                  <th>위험군</th>
+                  <th>담당자</th>
+                </tr>
+              </thead>
+              <tbody id="learnerRows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="view" id="reports" aria-labelledby="view-title">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">성과 리포트</p>
+              <h2>월간 운영 지표</h2>
+            </div>
+            <div class="range-control">
+              <input type="range" min="1" max="12" value="5" id="monthRange" />
+              <span id="monthLabel">5월</span>
+            </div>
+          </div>
+          <div class="report-grid">
+            <article class="chart-panel">
+              <h3>수료 추이</h3>
+              <div class="bar-chart" id="barChart"></div>
+            </article>
+            <article class="chart-panel">
+              <h3>콘텐츠 유형</h3>
+              <div class="donut-wrap">
+                <div class="donut" aria-hidden="true"></div>
+                <ul>
+                  <li><span class="swatch teal"></span>동영상 48%</li>
+                  <li><span class="swatch amber"></span>퀴즈 21%</li>
+                  <li><span class="swatch rose"></span>과제 18%</li>
+                  <li><span class="swatch ink"></span>자료 13%</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
